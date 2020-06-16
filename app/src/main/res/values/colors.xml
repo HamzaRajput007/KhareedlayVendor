@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f05025</color>
+    <color name="colorPrimaryDark">#f05025</color>
+    <color name="colorAccent">#f05025</color>
+
+    <color name="shimmer_bg">#dddddd</color>
+
+    <color name="status_bg">#8FF694</color>
+</resources>

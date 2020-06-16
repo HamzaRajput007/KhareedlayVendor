@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp"
+    tools:context=".ProductsDetailsActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardUseCompatPadding="true">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout_ordersList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:id="@+id/linear1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image_orders"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:background="@color/shimmer_bg" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/linear1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp">
+
+                        <TextView
+                            android:id="@+id/customerName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/shimmer_bg"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp"/>
+
+                        <TextView
+                            android:id="@+id/orderDateTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/shimmer_bg"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:background="@android:color/darker_gray" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tv_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/shimmer_bg"
+                        android:gravity="center_horizontal"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <LinearLayout
+                        android:id="@+id/linearItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/shimmer_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_totalItems_Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+                            android:id="@+id/tv_totalItems"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearbills"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/shimmer_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_totalbill_Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+                            android:id="@+id/tv_totalBill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearpayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/shimmer_bg"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_patmentMethod_Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <TextView
+                            android:id="@+id/tv_paymentMethod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:background="@android:color/darker_gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/_5sdp">
+
+                        <TextView
+                            android:id="@+id/tv_orderStatus"
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:background="@color/shimmer_bg"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_15sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
