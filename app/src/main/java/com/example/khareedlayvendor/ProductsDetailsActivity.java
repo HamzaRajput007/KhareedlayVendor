@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class ProductsDetailsActivity extends AppCompatActivity {
     private LinearLayout linearLayout_image, linearLayout_productName, linearLayout_regularPrice, linearLayout_salePrice, linearLayout_shortDescription,
             linearLayout_description;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,15 @@ public class ProductsDetailsActivity extends AppCompatActivity {
 
         init();
         bindDataToViews();
+
+        button_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toUpdateProduct = new Intent(getApplicationContext() , UpdateProduct.class);
+                toUpdateProduct.putExtra("product_model" , model_products_details);
+                startActivity(toUpdateProduct);
+            }
+        });
     }
 
     private void init() {
@@ -45,6 +56,7 @@ public class ProductsDetailsActivity extends AppCompatActivity {
         textView_description = findViewById(R.id.tv_Description_productDetails);
         imageView = findViewById(R.id.product_image);
         button_update = findViewById(R.id.button_update_ProductsDetails);
+
 
 
         linearLayout_image = findViewById(R.id.linearLayout_image);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface Api_Interface {
@@ -28,4 +29,10 @@ public interface Api_Interface {
                                                   @Query("consumer_key") String consumerKey,
                                                   @Query("consumer_secret") String consumerSecrete);
 
+    @PUT("wp-json/wc/v3/products")
+    Call<ArrayList<String>> updateProduct(@Query("regular_price") String regular_price ,
+                                          @Query("name") String name ,
+                                          @Query("description") String description ,
+                                          @Query("short_description") String short_description ,
+                                          @Query("sale_price") String sale_price );
 }
