@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -18,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrdersList extends AppCompatActivity {
+public class OrdersList extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private ArrayList<Model_OrderDetails> arrayList_orders;
@@ -37,7 +38,8 @@ public class OrdersList extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(OrdersList.this));
-        adapter = new OrdersList_Adapter(arrayList_orders,OrdersList.this);
+        adapter = new OrdersList_Adapter(arrayList_orders,OrdersList.this );
+
         recyclerView.setAdapter(adapter);
 
         vendorId = sharedPreferences.getString(Constants.KEY_USER_ID,"");
@@ -58,6 +60,14 @@ public class OrdersList extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Model_OrderDetails>> call, Response<ArrayList<Model_OrderDetails>> response) {
                 adapter.showShimmer = false;
                 adapter.refresh(response.body());
+                adapter.setOnItemClickListner(new OrdersList_Adapter.onItemClick() {
+                    @Override
+                    public void onClick(Model_OrderDetails model_orderDetails) {
+                        Toast.makeText(getApplicationContext(), "Status : " + arrayList_orders.get(0).getStatus(), Toast.LENGTH_SHORT).show();
+                        Intent checkIntent = new Intent(getApplicationContext() , MainActivity.class);
+                        startActivity(checkIntent);
+                    }
+                });
             }
 
             @Override
@@ -67,4 +77,6 @@ public class OrdersList extends AppCompatActivity {
             }
         });
     }
+
+
 }

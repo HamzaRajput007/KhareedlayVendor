@@ -7,4 +7,14 @@
     <color name="shimmer_bg">#dddddd</color>
 
     <color name="status_bg">#8FF694</color>
+
+    <color name="order_pending_color">#fcd573</color>
+    <color name="order_processing_color">#BF77fd77</color>
+    <color name="order_on_hold_color">#BFfa6060</color>
+    <color name="order_completed_color">#BF34fa2d</color>
+    <color name="order_cancelled_color">#bbbbbb</color>
+    <color name="order_refunded_color">#8050b6</color>
+    <color name="order_failed_color">#d82f2f</color>
+    <color name="order_trash_color">#A6800303</color>
+
 </resources>

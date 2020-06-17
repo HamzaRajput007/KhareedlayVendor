@@ -39,6 +39,7 @@ public class ProductsList_Adapter extends RecyclerView.Adapter<ProductsList_Adap
         notifyDataSetChanged();
     }
 
+
     public interface onItemClick{
         void onClick(Model_Products_Details model_products_details);
     }

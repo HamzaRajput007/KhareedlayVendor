@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_5sdp"
+        android:clickable="true"
         app:cardUseCompatPadding="true">
 
         <com.facebook.shimmer.ShimmerFrameLayout

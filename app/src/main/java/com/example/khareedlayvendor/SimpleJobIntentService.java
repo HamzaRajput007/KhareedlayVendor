@@ -2,8 +2,10 @@ package com.example.khareedlayvendor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.JobIntentService;
 
 public class SimpleJobIntentService extends JobIntentService {
@@ -15,6 +17,7 @@ public class SimpleJobIntentService extends JobIntentService {
         enqueueWork(context, SimpleJobIntentService.class, JOB_ID, work);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
         if (intent.getAction().equals("start")) {

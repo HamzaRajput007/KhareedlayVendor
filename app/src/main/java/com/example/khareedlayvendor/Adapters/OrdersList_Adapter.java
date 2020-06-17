@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,13 +27,18 @@ public class OrdersList_Adapter extends RecyclerView.Adapter<OrdersList_Adapter.
     private Context context;
     public boolean showShimmer = true;
     private int SHOW_SHIMMER_NUMBER = 5;
+    public onItemClick listner ;
 
-    public OrdersList_Adapter(ArrayList<Model_OrderDetails> arrayList_orders, Context context) {
+    public OrdersList_Adapter(ArrayList<Model_OrderDetails> arrayList_orders, Context context ) {
         this.arrayList_orders = arrayList_orders;
         this.context = context;
     }
 
-    public void refresh(ArrayList<Model_OrderDetails> arrayList_orders){
+    public  void setOnItemClickListner(onItemClick listner){
+        this.listner = listner;
+    }
+
+    public void refresh(ArrayList<Model_OrderDetails> arrayList_orders ){
         this.arrayList_orders = arrayList_orders;
         notifyDataSetChanged();
     }
@@ -53,7 +59,7 @@ public class OrdersList_Adapter extends RecyclerView.Adapter<OrdersList_Adapter.
             holder.shimmerFrameLayout.stopShimmer();
             holder.shimmerFrameLayout.setShimmer(null);
 
-            Model_OrderDetails model_orderDetails = arrayList_orders.get(position);
+            final Model_OrderDetails model_orderDetails = arrayList_orders.get(position);
 
             holder.imageView.setBackground(null);
             Picasso.get().load(R.drawable.default_image).into(holder.imageView);
@@ -80,8 +86,60 @@ public class OrdersList_Adapter extends RecyclerView.Adapter<OrdersList_Adapter.
             holder.textView_paymentmethodText.setText("Payment Method: ");
             holder.textView_paymentMethod.setText(model_orderDetails.getPayment_title());
 
-            holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.status_bg));
-            holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+            String orderStatus = model_orderDetails.getStatus();
+
+            switch (orderStatus){
+
+                case "pending":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_pending_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+                case "processing":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_processing_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                case "on-hold":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_on_hold_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                case "completed":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_completed_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                case "cancelled":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_cancelled_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                case "refunded":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_refunded_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                case "failed":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_failed_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                case "trash":
+                    holder.textView_orderStatus.setBackgroundColor(context.getResources().getColor(R.color.order_trash_color));
+                    holder.textView_orderStatus.setText(model_orderDetails.getStatus());
+                    break;
+
+                default:
+                    Toast.makeText(context, orderStatus + " is not a valid order status ", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listner.onClick(model_orderDetails);
+                }
+            });
         }
     }
 
@@ -98,7 +156,8 @@ public class OrdersList_Adapter extends RecyclerView.Adapter<OrdersList_Adapter.
         ShimmerFrameLayout shimmerFrameLayout;
         LinearLayout linearLayout_items,linearLayout_bill,linearLayout_payment;
 
-        public MyViewHolder(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView ) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.image_orders);
@@ -117,6 +176,15 @@ public class OrdersList_Adapter extends RecyclerView.Adapter<OrdersList_Adapter.
             linearLayout_items = itemView.findViewById(R.id.linearItems);
             linearLayout_bill = itemView.findViewById(R.id.linearbills);
             linearLayout_payment = itemView.findViewById(R.id.linearpayment);
+
+
         }
+        
+
     }
+
+    public interface onItemClick{
+        void onClick(Model_OrderDetails model_orderDetails);
+    }
+
 }
