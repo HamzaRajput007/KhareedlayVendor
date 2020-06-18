@@ -31,7 +31,7 @@
                     android:layout_height="@dimen/_170sdp">
 
                     <ImageView
-                        android:id="@+id/product_image"
+                        android:id="@+id/product_update_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
@@ -54,7 +54,7 @@
                         android:textSize="@dimen/_13sdp" />
 
                     <EditText
-                        android:id="@+id/tv_productName_productDetails"
+                        android:id="@+id/et_productName_productDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Product Name"
@@ -85,7 +85,7 @@
                         android:textSize="@dimen/_13sdp" />
 
                     <EditText
-                        android:id="@+id/tv_regularPrice_productDetails"
+                        android:id="@+id/et_regularPrice_productDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Regular Price"
@@ -115,7 +115,7 @@
                         android:textSize="@dimen/_13sdp" />
 
                     <EditText
-                        android:id="@+id/tv_salePrice_productDetails"
+                        android:id="@+id/et_salePrice_productDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Regular Price"
@@ -145,7 +145,7 @@
                         android:textSize="@dimen/_13sdp" />
 
                     <EditText
-                        android:id="@+id/tv_shortDescription_productDetails"
+                        android:id="@+id/et_shortDescription_productDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Regular Price"
@@ -175,7 +175,7 @@
                         android:textSize="@dimen/_13sdp" />
 
                     <EditText
-                        android:id="@+id/tv_Description_productDetails"
+                        android:id="@+id/et_Description_productDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Regular Price"
@@ -186,13 +186,13 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_update_ProductsDetails"
+                    android:id="@+id/button_update_ProductId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
                     android:padding="@dimen/_10sdp"
-                    android:text="Update"
+                    android:text="SAVE"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13sdp"

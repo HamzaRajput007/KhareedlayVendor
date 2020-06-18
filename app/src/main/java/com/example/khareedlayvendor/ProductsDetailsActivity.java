@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khareedlayvendor.Models.Models_Products.Model_Products_Details;
 import com.google.android.material.button.MaterialButton;
@@ -33,6 +34,7 @@ public class ProductsDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getSerializableExtra("model") != null) {
             model_products_details = (Model_Products_Details) intent.getSerializableExtra("model");
+            Toast.makeText(this, String.valueOf(model_products_details.getId()), Toast.LENGTH_SHORT).show();
         }
 
         init();
@@ -42,7 +44,10 @@ public class ProductsDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent toUpdateProduct = new Intent(getApplicationContext() , UpdateProduct.class);
-                toUpdateProduct.putExtra("product_model" , model_products_details);
+                Long productId = model_products_details.getId();
+                String imagePath = model_products_details.getArrayList_images().get(0);
+                toUpdateProduct.putExtra("image_url" , imagePath);
+                toUpdateProduct.putExtra("product_details" , model_products_details);
                 startActivity(toUpdateProduct);
             }
         });

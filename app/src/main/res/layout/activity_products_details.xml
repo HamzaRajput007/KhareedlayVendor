@@ -191,7 +191,7 @@
                         android:layout_alignParentBottom="true"
                         android:gravity="center"
                         android:padding="@dimen/_10sdp"
-                        android:text="Update"
+                        android:text="EDIT"
                         android:textAppearance="@style/TextAppearance.AppCompat.Button"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/_13sdp"

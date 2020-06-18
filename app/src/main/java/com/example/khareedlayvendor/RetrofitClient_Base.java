@@ -10,7 +10,7 @@ public class RetrofitClient_Base {
     private static RetrofitClient_Base mInstance;
     private static Retrofit retrofit;
 
-    private RetrofitClient_Base(){
+    public RetrofitClient_Base(){
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://khareedlaay.com/")
