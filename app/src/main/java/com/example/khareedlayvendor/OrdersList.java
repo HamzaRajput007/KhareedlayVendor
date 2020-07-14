@@ -1,13 +1,15 @@
 package com.example.khareedlayvendor;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.khareedlayvendor.Adapters.OrdersList_Adapter;
 import com.example.khareedlayvendor.AppUtils.Constants;
@@ -29,30 +31,39 @@ public class OrdersList extends AppCompatActivity{
     private SharedPreferences sharedPreferences;
     private String vendorId;
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id==android.R.id.home) {
+            Intent toMain = new Intent(getApplicationContext() , MainActivity.class);
+            startActivity(toMain);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders_list);
-
         init();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(OrdersList.this));
-        adapter = new OrdersList_Adapter(arrayList_orders,OrdersList.this );
-
+        adapter = new OrdersList_Adapter(arrayList_orders, OrdersList.this );
         recyclerView.setAdapter(adapter);
-
         vendorId = sharedPreferences.getString(Constants.KEY_USER_ID,"");
-
         getOrders();
     }
-
     private void init(){
         recyclerView = findViewById(R.id.recycler_ordersList);
         arrayList_orders = new ArrayList<>();
         sharedPreferences = getSharedPreferences(Constants.KEY_LOGIN_PREFRENCES,MODE_PRIVATE);
     }
-
     private void getOrders(){
         Call<ArrayList<Model_OrderDetails>> call = RetrofitClient_Base.getInstance().getApi().getOrders(vendorId,consumer_key,consumer_secrete);
         call.enqueue(new Callback<ArrayList<Model_OrderDetails>>() {
@@ -77,6 +88,4 @@ public class OrdersList extends AppCompatActivity{
             }
         });
     }
-
-
 }

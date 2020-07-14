@@ -140,6 +140,8 @@ public class OrdersList_Adapter extends RecyclerView.Adapter<OrdersList_Adapter.
                     listner.onClick(model_orderDetails);
                 }
             });
+
+
         }
     }
 

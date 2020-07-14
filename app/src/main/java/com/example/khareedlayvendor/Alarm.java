@@ -23,6 +23,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.khareedlayvendor.AppUtils.Constants;
+import com.example.khareedlayvendor.Models.Model_Orders.Model_ItemsDetails;
 import com.example.khareedlayvendor.Models.Model_Orders.Model_OrderDetails;
 
 import java.util.ArrayList;
@@ -36,16 +37,45 @@ import static com.example.khareedlayvendor.NotificationClass.NOTIFICATION;
 
 public class Alarm extends BroadcastReceiver
 {
+
+    private  ArrayList<Model_ItemsDetails> arrayList_ItemDetails;
+
+    private String consumer_key = "ck_cec24f9d9e3882b3b6ba0f4db13127b564fec9bb";
+    private String consumer_secrete = "cs_f18b2f622fa1ad0cbd7bfdcf730ad6ddc36d2bc0";
+    private ArrayList<Model_OrderDetails> arrayList_orders;
+
     private String vendorId;
     private SharedPreferences sharedPreferences;
     private NotificationManagerCompat notificationManagerCompat;
     public static int count = 1;
     private NotificationCompat.Builder builder = null;
     String GROUP_KEY_WORK_EMAIL = "com.android.example.WORK_EMAIL";
+    String itemName;
+    int quantity;
 
     @Override
     public void onReceive(final Context context, Intent intent)
     {
+        Call<ArrayList<Model_OrderDetails>> odersCall = RetrofitClient_Base.getInstance().getApi().getOrders(vendorId,consumer_key,consumer_secrete);
+        odersCall.enqueue(new Callback<ArrayList<Model_OrderDetails>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Model_OrderDetails>> call, Response<ArrayList<Model_OrderDetails>> response) {
+                arrayList_orders = response.body();
+
+                arrayList_ItemDetails = arrayList_orders.get(0).getArrayList_itemsDetails();
+                itemName = arrayList_ItemDetails.get(0).getName();
+                quantity = arrayList_ItemDetails.get(0).getQuantity();
+
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Model_OrderDetails>> call, Throwable t) {
+                Toast.makeText(context, "Failed to load notification Data", Toast.LENGTH_SHORT).show();
+                Log.d("Notification Data ", "Failed to load notification Data");
+                itemName = "Order's Data not recieved";
+                quantity = 0 ;
+            }
+        });
+
         sharedPreferences = context.getSharedPreferences(Constants.KEY_LOGIN_PREFRENCES,Context.MODE_PRIVATE);
         vendorId = sharedPreferences.getString(Constants.KEY_USER_ID,"");
 
@@ -77,11 +107,11 @@ public class Alarm extends BroadcastReceiver
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt(Constants.KEY_ORDER_ID,orderId);
                     editor.apply();
-                    generateNotification(context);
+                    generateNotification(context , itemName , String.valueOf(quantity));
                 }
                 else {
                     Toast.makeText(context, "No order listed", Toast.LENGTH_SHORT).show();
-//                    generateNotification(context);
+                    generateNotification(context , itemName , String.valueOf(quantity));
                 }
             }
 
@@ -104,21 +134,25 @@ public class Alarm extends BroadcastReceiver
         assert am != null;
         am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() +
-                        60 * 1000, time, pi);
+                        10 * 1000, time, pi);
         am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
                 SystemClock.elapsedRealtime() +
-                        60 * 1000,  pi);// Millisec * Second * Minute
+                        10 * 1000,  pi);// Millisec * Second * Minute
     }
 
+
+    //TODO Get the order details and show it on the notification.
+    //TODO apply onclick listner to the notification
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void generateNotification(Context context){
+    private void generateNotification(Context context , String title , String contentText){
         if (builder == null) {
             builder = new NotificationCompat.Builder(context, NOTIFICATION);
         }
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             builder.setSmallIcon(R.drawable.ic_orders)
-                    .setContentTitle("New Order received")
-                    .setContentText("This is New Order")
+                    .setContentTitle(title)
+                    .setContentText(contentText)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                     .setSound(alarmSound)

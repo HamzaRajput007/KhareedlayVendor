@@ -39,6 +39,7 @@ public class NotificationServices extends Service {
         return null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         onTaskRemoved(intent);
